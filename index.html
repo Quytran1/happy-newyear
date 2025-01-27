@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fireworks Animation</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /*body {
+        background: linear-gradient(#0007, #0000), #123;
+        margin: 0;
+        height: 100vh;
+        overflow: hidden;
+      }*/
+      /* Nền gradient chuyển động */
+      body {
+        background: linear-gradient(90deg, #ff0000, #ffd700, #ff4500);
+        background-size: 300% 300%;
+        animation: gradientShift 10s infinite;
+        height: 100vh;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      #container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+
+      /* Cài đặt chung cho ảnh mây */
+      .cloud {
+        position: absolute;
+        width: 200px; /* Kích thước ảnh */
+        opacity: 0; /* Bắt đầu ẩn */
+        animation: fadeIn 2s forwards;
+      }
+
+      /* Góc trên trái */
+      .cloud.top-left {
+        top: 20px;
+        left: 20px;
+        transform: rotate(0deg); /* Giữ nguyên chiều */
+        animation-delay: 0s;
+      }
+
+      /* Góc trên phải */
+      .cloud.top-right {
+        top: 20px;
+        right: 20px;
+        transform: scaleX(-1); /* Lật ngang */
+        animation-delay: 0.5s;
+      }
+
+      /* Góc dưới trái */
+      .cloud.bottom-left {
+        bottom: 20px;
+        left: 20px;
+        transform: scaleX(-1); /* Lật ngang */
+        animation-delay: 1s;
+      }
+
+      /* Góc dưới phải */
+      .cloud.bottom-right {
+        bottom: 20px;
+        right: 20px;
+        transform: rotate(0deg); /* Giữ nguyên chiều */
+        animation-delay: 1.5s;
+      }
+
+      /* Hiệu ứng fade-in */
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.5); /* Bắt đầu nhỏ */
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1); /* Đưa về kích thước gốc */
+        }
+      }
+
+      /* Hiệu ứng fade-in */
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.5); /* Bắt đầu nhỏ */
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1); /* Đưa về kích thước gốc */
+        }
+      }
+
+      /* Cuộn giấy */
+      .scroll-wrapper {
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        align-items: center;
+        opacity: 0; /* Ban đầu ẩn */
+        animation: fadeInScroll 0.5s ease-out forwards,
+          expandScroll 2s ease-out 0.5s forwards;
+      }
+
+      /* Phần cuộn trái */
+      .scroll-left {
+        position: relative;
+        width: 50px;
+        height: 200px;
+        background: url("scroll.png") no-repeat center;
+        background-size: contain;
+        z-index: 2; /* Luôn nằm trên nền giữa */
+      }
+
+      /* Phần nền giữa (kéo dãn) */
+      .scroll-center {
+        position: relative;
+        width: 0; /* Bắt đầu từ 0 */
+        height: 100px;
+        background: #c00; /* Màu đỏ nền */
+        border-top: 5px solid gold;
+        border-bottom: 5px solid gold;
+        z-index: 1; /* Nằm dưới cuộn trái/phải */
+        animation: expandWidth 2s ease-out forwards;
+      }
+
+      /* Phần cuộn phải */
+      .scroll-right {
+        position: relative;
+        width: 50px;
+        height: 200px;
+        background: url("scroll.png") no-repeat center;
+        background-size: contain;
+        transform: scaleX(-1); /* Lật ngang */
+        z-index: 2; /* Luôn nằm trên nền giữa */
+      }
+
+      /* Nội dung trên cuộn giấy */
+      .scroll-content {
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: "Arial", sans-serif;
+        font-family: "Great Vibes", cursive; /* Font chữ thư pháp */
+        font-size: 72px;
+        color: white;
+        text-align: center;
+        opacity: 0; /* Ban đầu ẩn */
+        animation: fadeInContent 1s ease-out forwards;
+        animation-delay: 2.5s; /* Hiện sau khi cuộn giấy mở xong */
+      }
+
+      /* Hiệu ứng kéo dãn phần nền giữa */
+      @keyframes expandWidth {
+        0% {
+          width: 0;
+        }
+        100% {
+          width: 800px; /* Chiều dài cuối cùng của nền giữa */
+        }
+      }
+
+      /* Hiệu ứng xuất hiện cuộn giấy */
+      @keyframes fadeInScroll {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      /* Hiệu ứng xuất hiện nội dung */
+      @keyframes fadeInContent {
+        0% {
+          opacity: 0;
+          transform: translate(-50%, -40%);
+        }
+        100% {
+          opacity: 1;
+          transform: translate(-50%, -50%);
+        }
+      }
+
+      /* Lồng đèn */
+      .lantern {
+        position: absolute;
+        top: 35%; /* Bắt đầu từ viền dưới của cuộn giấy */
+        opacity: 0; /* Ban đầu ẩn */
+        animation: dropLantern 1.5s ease-out forwards,
+          swing 5s infinite ease-in-out; /* Thêm hiệu ứng lắc lư */
+        transform-origin: top center;
+        z-index: 3;
+      }
+
+      .lantern img {
+        width: 120px; /* Kích thước lồng đèn */
+      }
+
+      /* Số nằm trong lồng đèn */
+      .number {
+        position: absolute;
+        top: 50%; /* Nằm giữa lồng đèn */
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: "Great Vibes", cursive;
+        font-size: 72px;
+        color: gold;
+        text-shadow: 2px 2px 5px #000; /* Thêm viền để dễ nhìn */
+        opacity: 0;
+        animation: fadeInNumbers 1.5s ease-out forwards;
+      }
+
+      .lantern::before {
+        content: "";
+        position: absolute;
+        top: -51px; /* Dây bắt đầu từ cuộn giấy */
+        left: 50%;
+        width: 2px;
+        height: 100px; /* Chiều dài dây treo */
+        background: gold;
+        transform: translateX(-50%);
+        z-index: -1;
+      }
+
+      /* Hiệu ứng thả lồng đèn */
+      @keyframes dropLantern {
+        0% {
+          opacity: 0;
+          transform: translate(-50%, -100%);
+        }
+        100% {
+          opacity: 1;
+          transform: translate(-50%, 0);
+        }
+      }
+
+      /* Hiệu ứng lắc lư */
+      @keyframes swing {
+        0% {
+          transform: rotate(0deg);
+        }
+        25% {
+          transform: rotate(10deg);
+        }
+        50% {
+          transform: rotate(0deg);
+        }
+        75% {
+          transform: rotate(-10deg);
+        }
+        100% {
+          transform: rotate(0deg);
+        }
+      }
+
+      /* Vị trí từng lồng đèn - căn chỉnh đối xứng */
+      .lantern.lantern-1 {
+        left: 25%; /* Lồng đèn đầu tiên sát mép trái cuộn giấy */
+        animation-delay: 1s;
+      }
+
+      .lantern.lantern-2 {
+        left: 35%; /* Lồng đèn thứ hai giữa 1 và 3 */
+        animation-delay: 1.2s;
+      }
+
+      .lantern.lantern-3 {
+        left: 57%; /* Lồng đèn thứ ba giữa 2 và 4 */
+        animation-delay: 1.4s;
+      }
+
+      .lantern.lantern-4 {
+        left: 67%; /* Lồng đèn cuối sát mép phải cuộn giấy */
+        animation-delay: 1.6s;
+      }
+
+      /* Hiệu ứng xuất hiện số */
+      @keyframes fadeInNumbers {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      .firework {
+        --initialSize: 0.5vmin;
+        --finalSize: 40vmin;
+        --particleSize: 0.2vmin;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, var(--initialY));
+        width: var(--initialSize);
+        aspect-ratio: 1;
+        animation: firework 3s infinite;
+        background-size: var(--initialSize) var(--initialSize);
+        background-repeat: no-repeat;
+      }
+
+      @keyframes firework {
+        0% {
+          transform: translate(var(--x), var(--initialY));
+          width: var(--initialSize);
+          opacity: 1;
+        }
+        50% {
+          width: 0.5vmin;
+          opacity: 1;
+        }
+        100% {
+          transform: translate(var(--x), calc(var(--y) + 10vmin));
+          width: var(--finalSize);
+          opacity: 0;
+        }
+      }
+      /* Pháo hoa particles */
+      .firework1 {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 0, 1),
+          rgb(0, 255, 55),
+          rgb(255, 0, 4),
+          rgb(255, 60, 0),
+          rgb(3, 209, 240),
+          rgba(255, 255, 0, 1),
+          rgba(255, 0, 0, 0)
+        );
+        opacity: 0.8;
+        animation: fireworkParticle 1.5s ease-out forwards;
+      }
+
+      @keyframes fireworkParticle {
+        0% {
+          transform: scale(0.5) translate(0, 0);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1) translate(var(--x), var(--y));
+          opacity: 0.9;
+        }
+        100% {
+          transform: scale(1) translate(calc(var(--x) * 2), calc(var(--y) * 2));
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <!-- Thêm ảnh mây vào 4 góc -->
+      <img src="cloud2.png" class="cloud top-left" alt="cloud" />
+      <img src="cloud.png" class="cloud top-right" alt="cloud" />
+      <img src="cloud3.png" class="cloud bottom-left" alt="cloud" />
+      <img src="cloud4.png" class="cloud bottom-right" alt="cloud" />
+
+      <!-- Cuộn giấy -->
+      <div class="scroll-wrapper">
+        <!-- Phần cuộn trái -->
+        <div class="scroll-left"></div>
+        <!-- Phần nền giữa -->
+        <div class="scroll-center"></div>
+        <!-- Phần cuộn phải -->
+        <div class="scroll-right"></div>
+      </div>
+
+      <!-- Nội dung hiện trên cuộn giấy -->
+      <div class="scroll-content">Chúc Mừng Năm Mới</div>
+
+      <!-- Lồng đèn -->
+      <div class="lantern lantern-1">
+        <div class="number" style="animation-delay: 1s">2</div>
+        <img src="lantern.png" alt="Lantern" />
+      </div>
+      <div class="lantern lantern-2">
+        <div class="number" style="animation-delay: 1.2s">0</div>
+        <img src="lantern.png" alt="Lantern" />
+      </div>
+      <div class="lantern lantern-3">
+        <div class="number" style="animation-delay: 1.4s">2</div>
+        <img src="lantern.png" alt="Lantern" />
+      </div>
+      <div class="lantern lantern-4">
+        <div class="number" style="animation-delay: 1.6s">5</div>
+        <img src="lantern.png" alt="Lantern" />
+      </div>
+    </div>
+
+    <script>
+      const container = document.getElementById("container");
+      const MAX_FIREWORKS = 50;
+      let activeFireworks = 0;
+      let isSoundPlaying = false;
+
+      const fireworkSound = new Audio("Firework2.mp3");
+      fireworkSound.loop = true;
+      fireworkSound.volume = 0.05;
+
+      const backgroundMusic = new Audio("TetSong.mp3");
+      backgroundMusic.loop = true;
+      backgroundMusic.volume = 0.2;
+
+      document.addEventListener("click", () => {
+        backgroundMusic.play();
+      });
+
+      // Lắng nghe sự kiện click hoặc touch
+      document.addEventListener("click", () => {
+        if (!isSoundPlaying) {
+          fireworkSound.play().catch((error) => {
+            console.error("Error playing firework sound:", error);
+          });
+          isSoundPlaying = true;
+        }
+      });
+
+      document.addEventListener("touchstart", () => {
+        if (!isSoundPlaying) {
+          fireworkSound.play().catch((error) => {
+            console.error("Error playing firework sound:", error);
+          });
+          isSoundPlaying = true;
+        }
+      });
+      function createFirework() {
+        if (activeFireworks >= MAX_FIREWORKS) return;
+
+        const firework = document.createElement("div");
+        firework.className = "firework";
+        const particles = document.createElement("div");
+        particles.className = "firework1";
+        const particleCount = 120;
+        let gradients = [];
+
+        for (let i = 0; i < particleCount; i++) {
+          const randomAngle = Math.random() * 2 * Math.PI;
+          const distance = Math.random() * 50 + 20;
+
+          const x = Math.cos(randomAngle) * distance;
+          const y = Math.sin(randomAngle) * distance;
+
+          const randomColor1 = `hsl(${Math.random() * 360}, 100%, 70%)`;
+          const randomColor2 = `hsl(${Math.random() * 360}, 100%, 50%)`;
+          gradients.push(
+            `radial-gradient(circle, ${randomColor1}, ${randomColor2} 50%, #0000) ${
+              50 + x
+            }% ${50 + y}%`
+          );
+        }
+
+        firework.style.background = gradients.join(",");
+        firework.style.backgroundSize = "var(--initialSize) var(--initialSize)";
+        firework.style.backgroundRepeat = "no-repeat";
+
+        const randomX = `${Math.random() * 100 - 50}vw`;
+        const randomY = `${Math.random() * -80}vmin`;
+        const randomInitialY = `${Math.random() * 60 + 50}vmin`;
+        const randomFinalSize = `${Math.random() * 20 + 30}vmin`;
+
+        firework.style.setProperty("--x", randomX);
+        firework.style.setProperty("--y", randomY);
+        firework.style.setProperty("--initialY", randomInitialY);
+        firework.style.setProperty("--finalSize", randomFinalSize);
+
+        firework.style.animationDuration = "3s";
+
+        const colors = [
+          "yellow",
+          "khaki",
+          "pink",
+          "cyan",
+          "lime",
+          "violet",
+          "orange",
+        ];
+        for (let i = 1; i <= 6; i++) {
+          const randomColor = colors[Math.floor(Math.random() * colors.length)];
+          firework.style.setProperty(`--color${i}`, randomColor);
+        }
+
+        container.appendChild(firework);
+        activeFireworks++;
+
+        setTimeout(() => {
+          if (!isSoundPlaying) {
+            fireworkSound.currentTime = 0;
+            fireworkSound.play();
+            isSoundPlaying = true;
+          }
+        }, 1500);
+
+        firework.addEventListener("animationend", () => {
+          firework.remove();
+          activeFireworks--;
+        });
+      }
+
+      function startFireworks() {
+        setInterval(() => {
+          createFirework();
+        }, 500);
+      }
+
+      startFireworks();
+
+      // Hàm tạo pháo hoa tại vị trí click với particles
+      const fireworkSound1 = new Audio("fireworktouch.mp3");
+      function createFirework1(x, y) {
+        fireworkSound1.currentTime = 0; // Reset âm thanh
+        fireworkSound1.play(); // Phát âm thanh
+        fireworkSound1.volume = 0.1;
+        const particleCount = 100;
+        for (let i = 0; i < particleCount; i++) {
+          const firework1 = document.createElement("div");
+          firework1.className = "firework1";
+
+          // Tạo hướng và khoảng cách ngẫu nhiên
+          const angle = (Math.random() * Math.PI * 2).toFixed(2);
+          const distance = Math.random() * 20 + 20; // khoảng cách từ tâm
+          const xOffset = Math.cos(angle) * distance;
+          const yOffset = Math.sin(angle) * distance;
+
+          firework1.style.setProperty("--x", `${xOffset}px`);
+          firework1.style.setProperty("--y", `${yOffset}px`);
+          firework1.style.left = `${x}px`;
+          firework1.style.top = `${y}px`;
+
+          container.appendChild(firework1);
+
+          // Xóa particle sau khi nổ xong
+          firework1.addEventListener("animationend", () => {
+            firework1.remove();
+          });
+        }
+      }
+
+      // Lắng nghe sự kiện click
+      container.addEventListener("click", (e) => {
+        const x = e.clientX;
+        const y = e.clientY;
+        createFirework1(x, y);
+      });
+
+      // Xử lý trên điện thoại
+      container.addEventListener("touchstart", (e) => {
+        const touch = e.touches[0];
+        const x = touch.clientX;
+        const y = touch.clientY;
+        createFirework1(x, y);
+      });
+    </script>
+  </body>
+</html>
