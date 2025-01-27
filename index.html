@@ -369,6 +369,12 @@
           opacity: 0;
         }
       }
+      body.portrait #container {
+        transform: rotate(-90deg);
+        transform-origin: center center;
+        width: 100vh;
+        height: 100vw;
+      }
     </style>
   </head>
   <body>
@@ -412,8 +418,20 @@
     </div>
 
     <script>
+      function updateOrientation() {
+        if (window.innerHeight > window.innerWidth) {
+          document.body.classList.add("portrait");
+          document.body.classList.remove("landscape");
+        } else {
+          document.body.classList.add("landscape");
+          document.body.classList.remove("portrait");
+        }
+      }
+
+      window.addEventListener("resize", updateOrientation);
+      window.addEventListener("load", updateOrientation);
       const container = document.getElementById("container");
-      const MAX_FIREWORKS = 50;
+      const MAX_FIREWORKS = 30;
       let activeFireworks = 0;
       let isSoundPlaying = false;
 
@@ -534,7 +552,7 @@
         fireworkSound1.currentTime = 0; // Reset âm thanh
         fireworkSound1.play(); // Phát âm thanh
         fireworkSound1.volume = 0.1;
-        const particleCount = 100;
+        const particleCount = 50;
         for (let i = 0; i < particleCount; i++) {
           const firework1 = document.createElement("div");
           firework1.className = "firework1";
@@ -568,6 +586,7 @@
 
       // Xử lý trên điện thoại
       container.addEventListener("touchstart", (e) => {
+        e.preventDefault();
         const touch = e.touches[0];
         const x = touch.clientX;
         const y = touch.clientY;
