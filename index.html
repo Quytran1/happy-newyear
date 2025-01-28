@@ -49,23 +49,23 @@
       /* Cài đặt chung cho ảnh mây */
       .cloud {
         position: absolute;
-        width: 200px; /* Kích thước ảnh */
+        width: 150px; /* Kích thước ảnh */
         opacity: 0; /* Bắt đầu ẩn */
         animation: fadeIn 2s forwards;
       }
 
       /* Góc trên trái */
       .cloud.top-left {
-        top: 20px;
-        left: 20px;
+        top: 10px;
+        left: 10px;
         transform: rotate(0deg); /* Giữ nguyên chiều */
         animation-delay: 0s;
       }
 
       /* Góc trên phải */
       .cloud.top-right {
-        top: 20px;
-        right: 20px;
+        top: 10px;
+        right: 10px;
         transform: scaleX(-1); /* Lật ngang */
         animation-delay: 0.5s;
       }
@@ -73,7 +73,7 @@
       /* Góc dưới trái */
       .cloud.bottom-left {
         bottom: 20px;
-        left: 20px;
+        left: 10px;
         transform: scaleX(-1); /* Lật ngang */
         animation-delay: 1s;
       }
@@ -81,7 +81,7 @@
       /* Góc dưới phải */
       .cloud.bottom-right {
         bottom: 20px;
-        right: 20px;
+        right: 10px;
         transform: rotate(0deg); /* Giữ nguyên chiều */
         animation-delay: 1.5s;
       }
@@ -127,7 +127,7 @@
       .scroll-left {
         position: relative;
         width: 50px;
-        height: 200px;
+        height: 150px;
         background: url("scroll.png") no-repeat center;
         background-size: contain;
         z-index: 2; /* Luôn nằm trên nền giữa */
@@ -149,7 +149,7 @@
       .scroll-right {
         position: relative;
         width: 50px;
-        height: 200px;
+        height: 150px;
         background: url("scroll.png") no-repeat center;
         background-size: contain;
         transform: scaleX(-1); /* Lật ngang */
@@ -159,12 +159,12 @@
       /* Nội dung trên cuộn giấy */
       .scroll-content {
         position: absolute;
-        top: 20%;
+        top: 35%;
         left: 50%;
         transform: translate(-50%, -50%);
         font-family: "Arial", sans-serif;
         font-family: "Great Vibes", cursive; /* Font chữ thư pháp */
-        font-size: 72px;
+        font-size: 40px;
         color: white;
         text-align: center;
         opacity: 0; /* Ban đầu ẩn */
@@ -178,7 +178,7 @@
           width: 0;
         }
         100% {
-          width: 800px; /* Chiều dài cuối cùng của nền giữa */
+          width: 550px; /* Chiều dài cuối cùng của nền giữa */
         }
       }
 
@@ -207,7 +207,7 @@
       /* Lồng đèn */
       .lantern {
         position: absolute;
-        top: 35%; /* Bắt đầu từ viền dưới của cuộn giấy */
+        top: 62%; /* Bắt đầu từ viền dưới của cuộn giấy */
         opacity: 0; /* Ban đầu ẩn */
         animation: dropLantern 1.5s ease-out forwards,
           swing 5s infinite ease-in-out; /* Thêm hiệu ứng lắc lư */
@@ -216,7 +216,7 @@
       }
 
       .lantern img {
-        width: 120px; /* Kích thước lồng đèn */
+        width: 90px; /* Kích thước lồng đèn */
       }
 
       /* Số nằm trong lồng đèn */
@@ -278,7 +278,7 @@
 
       /* Vị trí từng lồng đèn - căn chỉnh đối xứng */
       .lantern.lantern-1 {
-        left: 25%; /* Lồng đèn đầu tiên sát mép trái cuộn giấy */
+        left: 20%; /* Lồng đèn đầu tiên sát mép trái cuộn giấy */
         animation-delay: 1s;
       }
 
@@ -288,12 +288,12 @@
       }
 
       .lantern.lantern-3 {
-        left: 57%; /* Lồng đèn thứ ba giữa 2 và 4 */
+        left: 54%; /* Lồng đèn thứ ba giữa 2 và 4 */
         animation-delay: 1.4s;
       }
 
       .lantern.lantern-4 {
-        left: 67%; /* Lồng đèn cuối sát mép phải cuộn giấy */
+        left: 69%; /* Lồng đèn cuối sát mép phải cuộn giấy */
         animation-delay: 1.6s;
       }
 
@@ -370,57 +370,53 @@
           opacity: 0;
         }
       }
-      @media (max-width: 768px) {
-        /* Giảm kích thước cuộn giấy để vừa màn hình */
-        .scroll-center {
-          /* Thay vì 800px, chuyển sang 70% viewport chiều rộng */
-          width: 70vw;
-        }
-        /* Giảm kích thước font chữ */
-        .scroll-content {
-          font-size: 36px; /* Cỡ chữ nhỏ hơn */
-        }
-        /* Lồng đèn nhỏ lại */
-        .lantern img {
-          width: 15vw;
-          max-width: 80px; /* Giới hạn không quá to */
-        }
-        /* Số trên lồng đèn cũng nhỏ lại */
-        .number {
-          font-size: 32px;
+      @media screen and (orientation: portrait) {
+        body {
+          transform: rotate(90deg);
+          transform-origin: left top;
+          width: 100vh;
+          height: 100vw;
+          overflow: hidden;
         }
       }
-
-      /* Khi màn hình rất nhỏ (dưới 480px) - tùy chỉnh thêm */
       @media (max-width: 480px) {
         .scroll-center {
           width: 65vw;
-          height: 80px; /* Nếu muốn hạ chiều cao */
+          height: 80px;
         }
         .scroll-content {
           font-size: 24px;
         }
         .lantern img {
-          width: 25vw;
+          width: 20vw;
           max-width: 60px;
         }
         .number {
-          font-size: 24px;
+          font-size: 20px;
         }
       }
 
-      /* Tối ưu riêng cho orientation: portrait (dọc) */
+      /* Portrait (dọc) – tăng scale để cuộn giấy to hơn chút */
       @media screen and (orientation: portrait) {
-        /* Nếu muốn, thay đổi vị trí cuộn giấy hoặc lồng đèn */
         .scroll-wrapper {
-          top: 30%;
+          /*
+           top: 25% => tuỳ bạn thay đổi cho giống ảnh
+           transform: translate(-50%, -50%) scale(1.1) => phóng to 10%
+          */
+          top: 25%;
+          transform: translate(-50%, -50%) scale(1.1);
         }
       }
 
-      /* Tối ưu riêng cho orientation: landscape (ngang) */
+      /* Landscape (ngang) – có thể hạ scale xuống chút để vừa khung ngang */
       @media screen and (orientation: landscape) {
         .scroll-wrapper {
+          /*
+           top: 50% => hay 35% tuỳ canh
+           scale(0.9) => thu nhỏ 10% nếu bị tràn
+          */
           top: 35%;
+          transform: translate(-50%, -50%) scale(0.9);
         }
       }
     </style>
@@ -562,6 +558,7 @@
 
         setTimeout(() => {
           if (!isSoundPlaying) {
+            backgroundMusic.play();
             fireworkSound.currentTime = 0;
             fireworkSound.play();
             isSoundPlaying = true;
