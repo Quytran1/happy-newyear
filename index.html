@@ -350,8 +350,7 @@
           rgb(0, 255, 55),
           rgb(255, 0, 4),
           rgb(255, 60, 0),
-          rgb(3, 209, 240),
-          rgba(255, 0, 0, 0)
+          rgb(3, 209, 240)
         );
         opacity: 0.8;
         animation: fireworkParticle 1.5s ease-out forwards;
@@ -363,12 +362,65 @@
           opacity: 1;
         }
         50% {
-          transform: scale(1) translate(var(--x), var(--y));
+          transformx: scale(1) translate(var(--x), var(--y));
           opacity: 0.9;
         }
         100% {
           transform: scale(1) translate(calc(var(--x) * 2), calc(var(--y) * 2));
           opacity: 0;
+        }
+      }
+      @media (max-width: 768px) {
+        /* Giảm kích thước cuộn giấy để vừa màn hình */
+        .scroll-center {
+          /* Thay vì 800px, chuyển sang 70% viewport chiều rộng */
+          width: 70vw;
+        }
+        /* Giảm kích thước font chữ */
+        .scroll-content {
+          font-size: 36px; /* Cỡ chữ nhỏ hơn */
+        }
+        /* Lồng đèn nhỏ lại */
+        .lantern img {
+          width: 15vw;
+          max-width: 80px; /* Giới hạn không quá to */
+        }
+        /* Số trên lồng đèn cũng nhỏ lại */
+        .number {
+          font-size: 32px;
+        }
+      }
+
+      /* Khi màn hình rất nhỏ (dưới 480px) - tùy chỉnh thêm */
+      @media (max-width: 480px) {
+        .scroll-center {
+          width: 65vw;
+          height: 80px; /* Nếu muốn hạ chiều cao */
+        }
+        .scroll-content {
+          font-size: 24px;
+        }
+        .lantern img {
+          width: 25vw;
+          max-width: 60px;
+        }
+        .number {
+          font-size: 24px;
+        }
+      }
+
+      /* Tối ưu riêng cho orientation: portrait (dọc) */
+      @media screen and (orientation: portrait) {
+        /* Nếu muốn, thay đổi vị trí cuộn giấy hoặc lồng đèn */
+        .scroll-wrapper {
+          top: 30%;
+        }
+      }
+
+      /* Tối ưu riêng cho orientation: landscape (ngang) */
+      @media screen and (orientation: landscape) {
+        .scroll-wrapper {
+          top: 35%;
         }
       }
     </style>
