@@ -370,6 +370,143 @@
           opacity: 0;
         }
       }
+
+      /* Hiệu ứng bao lì xì */
+      .lixi-container {
+        position: absolute;
+        bottom: 20%;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        opacity: 0;
+
+        animation: lixiAppear 4s ease-out forwards,
+          lixiShake 0.5s infinite ease-in-out;
+        animation-delay: 3.6s;
+        cursor: pointer;
+      }
+
+      .lixi-container img {
+        width: 40px;
+        animation: glow 1s infinite alternate;
+      }
+
+      @keyframes lixiAppear {
+        0% {
+          transform: translate(-50%, 50%) scale(0.1);
+          opacity: 0;
+        }
+        100% {
+          transform: translate(-50%, 0) scale(1);
+          opacity: 1;
+        }
+      }
+
+      @keyframes lixiShake {
+        0%,
+        100% {
+          transform: translate(-50%, 0) rotate(0deg);
+        }
+        25% {
+          transform: translate(-50%, 0) rotate(7deg);
+        }
+        50% {
+          transform: translate(-50%, 0) rotate(0deg);
+        }
+        75% {
+          transform: translate(-50%, 0) rotate(-7deg);
+        }
+      }
+
+      @keyframes glow {
+        0% {
+          filter: drop-shadow(0 0 10px rgb(249, 249, 249))
+            drop-shadow(0 0 20px gold);
+        }
+        100% {
+          filter: drop-shadow(0 0 20px rgb(255, 255, 255))
+            drop-shadow(0 0 30px gold);
+        }
+      }
+
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+      }
+
+      .message-box {
+        position: relative;
+        width: 90%;
+        max-width: 500px;
+        background: url('backgroundTet.png') no-repeat center;
+        background-size: contain;
+        padding: 40px;
+        text-align: center;
+        font-family: "Great Vibes", cursive;
+        font-size: 18px;
+        color: gold;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        word-wrap: break-word;
+      }
+
+      .message-text {
+        max-width: 70%;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        line-height: 1.0;
+        white-space: normal;
+      }
+
+      .message-box img {
+        width: 100px;
+      }
+
+      .message-box .uni {
+        position: absolute;
+        top: 5%;
+        left: 20%;
+        width: 60px;
+      }
+
+      .message-box .bena {
+        position: absolute;
+        bottom: 5%;
+        right: 20%;
+        width: 60px;
+      }
+
+      @media (max-width: 480px) {
+        .message-box {
+          font-size: 18px;
+          padding: 30px;
+        }
+        .message-text {
+          max-width: 90%;
+        }
+        .message-box img {
+          width: 70px;
+        }
+        .message-box .uni {
+          left: 18%;
+          width: 50px;
+        }
+        .message-box .bena {
+          right: 18%;
+          width: 50px;
+        }
+
+      }
       @media screen and (orientation: portrait) {
         body {
           transform: rotate(90deg);
@@ -458,6 +595,18 @@
       <div class="lantern lantern-4">
         <div class="number" style="animation-delay: 1.6s">5</div>
         <img src="lantern.png" alt="Lantern" />
+      </div>
+
+      <div id="container">
+      <div class="lixi-container">
+        <img src="lixi.jpg" alt="Bao lì xì" id="lixi" />
+      </div>
+      <div class="overlay" id="overlay">
+        <div class="message-box">
+          <img src="uni.png" alt="Lân" />
+          <div class="message-text">Chúc con gái năm mới vui vẻ<br>Mong mọi điều đẹp nhất sẽ dành cho con <br> Hãy luôn ngoan ngoãn giỏi giang và chăm chỉ <br> Và luôn luôn Xinh đẹp rạng ngời</div>
+          <img src="bena.png" alt="Rắn may mắn" />
+        </div>
       </div>
     </div>
 
@@ -625,6 +774,26 @@
         const y = touch.clientY;
         createFirework1(x, y);
       });
+      const lixi = document.getElementById("lixi");
+      const overlay = document.getElementById("overlay");
+
+      lixi.addEventListener("click", () => {
+  overlay.style.display = "flex";
+});
+
+lixi.addEventListener("touchstart", (e) => {
+  e.preventDefault(); // Ngăn chặn hành vi mặc định để đảm bảo sự kiện không bị gián đoạn
+  overlay.style.display = "flex";
+});
+
+overlay.addEventListener("click", () => {
+  overlay.style.display = "none";
+});
+
+overlay.addEventListener("touchstart", (e) => {
+  e.preventDefault();
+  overlay.style.display = "none";
+});
     </script>
   </body>
 </html>

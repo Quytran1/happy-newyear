@@ -49,23 +49,23 @@
       /* Cài đặt chung cho ảnh mây */
       .cloud {
         position: absolute;
-        width: 200px; /* Kích thước ảnh */
+        width: 150px; /* Kích thước ảnh */
         opacity: 0; /* Bắt đầu ẩn */
         animation: fadeIn 2s forwards;
       }
 
       /* Góc trên trái */
       .cloud.top-left {
-        top: 20px;
-        left: 20px;
+        top: 10px;
+        left: 10px;
         transform: rotate(0deg); /* Giữ nguyên chiều */
         animation-delay: 0s;
       }
 
       /* Góc trên phải */
       .cloud.top-right {
-        top: 20px;
-        right: 20px;
+        top: 10px;
+        right: 10px;
         transform: scaleX(-1); /* Lật ngang */
         animation-delay: 0.5s;
       }
@@ -73,7 +73,7 @@
       /* Góc dưới trái */
       .cloud.bottom-left {
         bottom: 20px;
-        left: 20px;
+        left: 10px;
         transform: scaleX(-1); /* Lật ngang */
         animation-delay: 1s;
       }
@@ -81,7 +81,7 @@
       /* Góc dưới phải */
       .cloud.bottom-right {
         bottom: 20px;
-        right: 20px;
+        right: 10px;
         transform: rotate(0deg); /* Giữ nguyên chiều */
         animation-delay: 1.5s;
       }
@@ -127,7 +127,7 @@
       .scroll-left {
         position: relative;
         width: 50px;
-        height: 200px;
+        height: 150px;
         background: url("scroll.png") no-repeat center;
         background-size: contain;
         z-index: 2; /* Luôn nằm trên nền giữa */
@@ -149,7 +149,7 @@
       .scroll-right {
         position: relative;
         width: 50px;
-        height: 200px;
+        height: 150px;
         background: url("scroll.png") no-repeat center;
         background-size: contain;
         transform: scaleX(-1); /* Lật ngang */
@@ -159,12 +159,12 @@
       /* Nội dung trên cuộn giấy */
       .scroll-content {
         position: absolute;
-        top: 20%;
+        top: 35%;
         left: 50%;
         transform: translate(-50%, -50%);
         font-family: "Arial", sans-serif;
         font-family: "Great Vibes", cursive; /* Font chữ thư pháp */
-        font-size: 72px;
+        font-size: 40px;
         color: white;
         text-align: center;
         opacity: 0; /* Ban đầu ẩn */
@@ -178,7 +178,7 @@
           width: 0;
         }
         100% {
-          width: 800px; /* Chiều dài cuối cùng của nền giữa */
+          width: 550px; /* Chiều dài cuối cùng của nền giữa */
         }
       }
 
@@ -207,7 +207,7 @@
       /* Lồng đèn */
       .lantern {
         position: absolute;
-        top: 35%; /* Bắt đầu từ viền dưới của cuộn giấy */
+        top: 62%; /* Bắt đầu từ viền dưới của cuộn giấy */
         opacity: 0; /* Ban đầu ẩn */
         animation: dropLantern 1.5s ease-out forwards,
           swing 5s infinite ease-in-out; /* Thêm hiệu ứng lắc lư */
@@ -216,7 +216,7 @@
       }
 
       .lantern img {
-        width: 120px; /* Kích thước lồng đèn */
+        width: 90px; /* Kích thước lồng đèn */
       }
 
       /* Số nằm trong lồng đèn */
@@ -278,7 +278,7 @@
 
       /* Vị trí từng lồng đèn - căn chỉnh đối xứng */
       .lantern.lantern-1 {
-        left: 25%; /* Lồng đèn đầu tiên sát mép trái cuộn giấy */
+        left: 20%; /* Lồng đèn đầu tiên sát mép trái cuộn giấy */
         animation-delay: 1s;
       }
 
@@ -288,12 +288,12 @@
       }
 
       .lantern.lantern-3 {
-        left: 57%; /* Lồng đèn thứ ba giữa 2 và 4 */
+        left: 54%; /* Lồng đèn thứ ba giữa 2 và 4 */
         animation-delay: 1.4s;
       }
 
       .lantern.lantern-4 {
-        left: 67%; /* Lồng đèn cuối sát mép phải cuộn giấy */
+        left: 69%; /* Lồng đèn cuối sát mép phải cuộn giấy */
         animation-delay: 1.6s;
       }
 
@@ -370,6 +370,192 @@
           opacity: 0;
         }
       }
+
+      /* Hiệu ứng bao lì xì */
+      .lixi-container {
+        position: absolute;
+        bottom: 20%;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        opacity: 0;
+
+        animation: lixiAppear 4s ease-out forwards,
+          lixiShake 0.5s infinite ease-in-out;
+        animation-delay: 3.6s;
+        cursor: pointer;
+      }
+
+      .lixi-container img {
+        width: 40px;
+        animation: glow 1s infinite alternate;
+      }
+
+      @keyframes lixiAppear {
+        0% {
+          transform: translate(-50%, 50%) scale(0.1);
+          opacity: 0;
+        }
+        100% {
+          transform: translate(-50%, 0) scale(1);
+          opacity: 1;
+        }
+      }
+
+      @keyframes lixiShake {
+        0%,
+        100% {
+          transform: translate(-50%, 0) rotate(0deg);
+        }
+        25% {
+          transform: translate(-50%, 0) rotate(7deg);
+        }
+        50% {
+          transform: translate(-50%, 0) rotate(0deg);
+        }
+        75% {
+          transform: translate(-50%, 0) rotate(-7deg);
+        }
+      }
+
+      @keyframes glow {
+        0% {
+          filter: drop-shadow(0 0 10px rgb(249, 249, 249))
+            drop-shadow(0 0 20px gold);
+        }
+        100% {
+          filter: drop-shadow(0 0 20px rgb(255, 255, 255))
+            drop-shadow(0 0 30px gold);
+        }
+      }
+
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+      }
+
+      .message-box {
+        position: relative;
+        width: 90%;
+        max-width: 500px;
+        background: url('backgroundTet.png') no-repeat center;
+        background-size: contain;
+        padding: 40px;
+        text-align: center;
+        font-family: "Great Vibes", cursive;
+        font-size: 18px;
+        color: gold;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        word-wrap: break-word;
+      }
+
+      .message-text {
+        max-width: 70%;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        line-height: 1.0;
+        white-space: normal;
+      }
+
+      .message-box img {
+        width: 100px;
+      }
+
+      .message-box .uni {
+        position: absolute;
+        top: 5%;
+        left: 20%;
+        width: 60px;
+      }
+
+      .message-box .bena {
+        position: absolute;
+        bottom: 5%;
+        right: 20%;
+        width: 60px;
+      }
+
+      @media (max-width: 480px) {
+        .message-box {
+          font-size: 18px;
+          padding: 30px;
+        }
+        .message-text {
+          max-width: 90%;
+        }
+        .message-box img {
+          width: 70px;
+        }
+        .message-box .uni {
+          left: 18%;
+          width: 50px;
+        }
+        .message-box .bena {
+          right: 18%;
+          width: 50px;
+        }
+
+      }
+      @media screen and (orientation: portrait) {
+        body {
+          transform: rotate(90deg);
+          transform-origin: left top;
+          width: 100vh;
+          height: 100vw;
+          overflow: hidden;
+        }
+      }
+      @media (max-width: 480px) {
+        .scroll-center {
+          width: 65vw;
+          height: 80px;
+        }
+        .scroll-content {
+          font-size: 24px;
+        }
+        .lantern img {
+          width: 20vw;
+          max-width: 60px;
+        }
+        .number {
+          font-size: 20px;
+        }
+      }
+
+      /* Portrait (dọc) – tăng scale để cuộn giấy to hơn chút */
+      @media screen and (orientation: portrait) {
+        .scroll-wrapper {
+          /*
+           top: 25% => tuỳ bạn thay đổi cho giống ảnh
+           transform: translate(-50%, -50%) scale(1.1) => phóng to 10%
+          */
+          top: 25%;
+          transform: translate(-50%, -50%) scale(1.1);
+        }
+      }
+
+      /* Landscape (ngang) – có thể hạ scale xuống chút để vừa khung ngang */
+      @media screen and (orientation: landscape) {
+        .scroll-wrapper {
+          /*
+           top: 50% => hay 35% tuỳ canh
+           scale(0.9) => thu nhỏ 10% nếu bị tràn
+          */
+          top: 35%;
+          transform: translate(-50%, -50%) scale(0.9);
+        }
+      }
     </style>
   </head>
   <body>
@@ -409,6 +595,18 @@
       <div class="lantern lantern-4">
         <div class="number" style="animation-delay: 1.6s">5</div>
         <img src="lantern.png" alt="Lantern" />
+      </div>
+
+      <div id="container">
+      <div class="lixi-container">
+        <img src="lixi.jpg" alt="Bao lì xì" id="lixi" />
+      </div>
+      <div class="overlay" id="overlay">
+        <div class="message-box">
+          <img src="uni.png" alt="Lân" />
+          <div class="message-text">Chúc mọi người một năm mới<br> an khang thịnh vượng <br> vạn sự như ý!</div>
+          <img src="bena.png" alt="Rắn may mắn" />
+        </div>
       </div>
     </div>
 
@@ -509,6 +707,7 @@
 
         setTimeout(() => {
           if (!isSoundPlaying) {
+            backgroundMusic.play();
             fireworkSound.currentTime = 0;
             fireworkSound.play();
             isSoundPlaying = true;
@@ -575,6 +774,26 @@
         const y = touch.clientY;
         createFirework1(x, y);
       });
+      const lixi = document.getElementById("lixi");
+      const overlay = document.getElementById("overlay");
+
+      lixi.addEventListener("click", () => {
+  overlay.style.display = "flex";
+});
+
+lixi.addEventListener("touchstart", (e) => {
+  e.preventDefault(); // Ngăn chặn hành vi mặc định để đảm bảo sự kiện không bị gián đoạn
+  overlay.style.display = "flex";
+});
+
+overlay.addEventListener("click", () => {
+  overlay.style.display = "none";
+});
+
+overlay.addEventListener("touchstart", (e) => {
+  e.preventDefault();
+  overlay.style.display = "none";
+});
     </script>
   </body>
 </html>
